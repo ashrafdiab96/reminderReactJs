@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { Container } from "react-bootstrap";
+import { dates } from "./data";
+import DatesCount from "./components/DatesCount";
+import DatesList from "./components/DatesList";
+import DatesAction from "./components/DatesAction";
+import { useState } from "react";
+import { handleDelete, handleShow } from "./helper/Actions";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    const [datesData, setDatesData] = useState(dates);
+
+    return (
+        <div className="font color-body">
+            <Container className="py-5">
+                <DatesCount count={datesData.length} />
+                <DatesList dates={datesData} />
+                <DatesAction
+                    onDelete={() => handleDelete(setDatesData)}
+                    onShow={() => handleShow(setDatesData, dates)}
+                />
+            </Container>
+        </div>
+    );
 }
 
 export default App;
